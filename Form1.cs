@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Linq;
+using System.Data.Entity.Infrastructure;
 
 namespace EmployeeManagementApp
 {
@@ -19,61 +20,60 @@ namespace EmployeeManagementApp
         }
 
         EmployeeEntities db;
-        ErrorProvider errorProvider = new ErrorProvider();
+        UISource employeeUISource;
+
+        Dictionary<string, TextBox> columnToTextBox;
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            editPanel.Enabled = false;
+            columnToTextBox = new Dictionary<string, TextBox>()
+            {
+                ["Id"] = txtId,
+                ["ФИО"] = txtFullName,
+                ["Департамент"] = txtDepartment,
+                ["Должность"] = txtPost,
+                ["Категория"] = txtCategory
+            };
 
             db = new EmployeeEntities();
 
+            employeeUISource = new EmployeeUISource(db, employeeBindingSource);
+
+            editPanel.Enabled = false;
             db.Configuration.ProxyCreationEnabled = false;
             db.Configuration.LazyLoadingEnabled = false;
 
-            employeeBindingSource.DataSource = db.Employee.ToList();
-            firedBindingSource.DataSource = db.Fired.ToList();
+            employeeUISource.RebuildDataSource();
 
-            txtId.DataBindings.Add("Text", employeeBindingSource, "Id");
-            txtFullName.DataBindings.Add("Text", employeeBindingSource, "ФИО");
-            txtDepartment.DataBindings.Add("Text", employeeBindingSource, "Департамент");
-            txtPost.DataBindings.Add("Text", employeeBindingSource, "Должность");
-            txtCategory.DataBindings.Add("Text", employeeBindingSource, "Категория");
-
+            foreach (var pair in columnToTextBox)
+            {
+                pair.Value.DataBindings.Add("Text", employeeBindingSource, pair.Key);
+            }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             btnAdd.Enabled = true;
             editPanel.Enabled = true;
+            txtId.Enabled = false;
 
-            txtId.Select();
-            //txtFullName.Select();
-            //txtDepartment.Select();
-            //txtPost.Select();
-            //txtCategory.Select();
+            Employee person = new Employee()
+            {
+                Id = employeeBindingSource.Count + 1
+            };
 
-            Employee person = new Employee();
             db.Employee.Add(person);
             employeeBindingSource.Add(person);
             employeeBindingSource.MoveLast();
-
-            // db.SaveChangesAsync();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
             btnEdit.Enabled = false;
             editPanel.Enabled = true;
+            txtId.Enabled = false;
 
-            //txtId.Select();
-
-            
             txtFullName.Select();
-            //txtDepartment.Select();
-            //txtPost.Select();
-            //txtCategory.Select();
-
-            // db.SaveChangesAsync();
         }
 
         private async void btnSave_Click(object sender, EventArgs e)
@@ -81,11 +81,14 @@ namespace EmployeeManagementApp
             try
             {
                 await db.SaveChangesAsync();
-                MessageBox.Show("Сохранено", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(Localization.Saved, Localization.Message, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                editPanel.Enabled = false;
+                btnEdit.Enabled = true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, Localization.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -94,216 +97,66 @@ namespace EmployeeManagementApp
             editPanel.Enabled = false;
             btnAdd.Enabled = true;
             btnEdit.Enabled = true;
-            employeeBindingSource.ResetBindings(false);
+
+            foreach (DbEntityEntry entry in db.ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case System.Data.Entity.EntityState.Added:
+                        entry.State = System.Data.Entity.EntityState.Detached;
+                        employeeBindingSource.RemoveCurrent();
+                        break;
+                    case System.Data.Entity.EntityState.Modified:
+                        entry.State = System.Data.Entity.EntityState.Unchanged;
+                        employeeBindingSource.CancelEdit();
+                        break;
+                    case System.Data.Entity.EntityState.Deleted:
+                        entry.Reload();
+                        break;
+                }
+            }
+
+            employeeBindingSource.ResetBindings(true);
         }
 
         private void dataGridViewEmployee_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
-            if (dataGridViewEmployee.Columns[e.ColumnIndex].Name == "Delete")
+            if (dataGridViewEmployee.Columns[e.ColumnIndex].Name == "flag_fired")
             {
                 var employee = employeeBindingSource.Current as Employee;
-                Fired firedEmployee = new Fired()
-                {
-                    Id = employee.Id,
-                    ФИО = employee.ФИО,
-                    Департамент = employee.Департамент,
-                    Должность = employee.Должность,
-                    Категория = employee.Категория
-                };
-
-                if (MessageBox.Show($"Поместить пользователя {employee.ФИО} в группу уволенных?", "Сообщение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    db.Fired.Add(firedEmployee);
-                    firedBindingSource.Add(firedEmployee);
-
-                    db.Employee.Remove(employeeBindingSource.Current as Employee);
-                    employeeBindingSource.RemoveCurrent();
-
-                    //db.SaveChangesAsync();
-                }
-            }
-        }
-
-        private void dataGridViewFired_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (dataGridViewFired.Columns[e.ColumnIndex].Name == "Restore")
-            {
-                var fired = firedBindingSource.Current as Fired;
-                Employee recoveredEmployee = new Employee()
-                {
-                    Id = fired.Id,
-                    ФИО = fired.ФИО,
-                    Департамент = fired.Департамент,
-                    Должность = fired.Должность,
-                    Категория = fired.Категория
-                };
-
-                if (MessageBox.Show($"Восстановить пользователя {fired.ФИО} ?", "Сообщение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    db.Employee.Add(recoveredEmployee);
-                    employeeBindingSource.Add(recoveredEmployee);
-
-                    db.Fired.Remove(firedBindingSource.Current as Fired);
-                    firedBindingSource.RemoveCurrent();
-
-                    //   db.SaveChangesAsync();
-                }
-            }
-        }
-
-        private void dataGridViewFired_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                Fired fired = firedBindingSource.Current as Fired;
-
-                if (MessageBox.Show($"Удалить пользователя {fired.ФИО} навсегда?", "Сообщение", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    db.Fired.Remove(firedBindingSource.Current as Fired);
-                    firedBindingSource.RemoveCurrent();
-
-                    //  db.SaveChangesAsync();
-                }
+                employee.Уволен = !employee.Уволен;
             }
         }
 
         private void txtFind_KeyPress_1(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)13) //кнопка Enter
+            if (e.KeyChar != (char)Keys.Enter)
             {
-                if (string.IsNullOrEmpty(txtFind.Text))
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtFind.Text))
+            {
+                employeeUISource.RebuildDataSource();
+            }
+            else
+            {
+                employeeUISource.RebuildListFilter(txtFind.Text);
+            }
+        }
+
+        private void dataGridViewEmployee_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                Employee employee = employeeBindingSource.Current as Employee;
+
+                if (MessageBox.Show(Localization.ConfirmDelete(employee.ФИО), Localization.Message, MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    if (tabControl.SelectedTab == tabPageWorkers)
-                    {
-                        employeeBindingSource.DataSource = db.Employee.ToList();
-                    }
-
-                    if (tabControl.SelectedTab == tabPageFired)
-                    {
-                        employeeBindingSource.DataSource = db.Fired.ToList();
-                    }
-                }
-                else
-                {
-                    if (tabControl.SelectedTab == tabPageWorkers)
-                    {
-                        var query = from match in db.Employee.Where(x => x.Id.ToString().Contains(txtFind.Text) ||
-                                                                         x.ФИО.Contains(txtFind.Text) ||
-                                                                         x.Департамент.Contains(txtFind.Text) ||
-                                                                         x.Должность.Contains(txtFind.Text) ||
-                                                                         x.Категория.Contains(txtFind.Text))
-                                    select match;
-
-                        employeeBindingSource.DataSource = query.ToList();
-                    }
-
-                    if (tabControl.SelectedTab == tabPageFired)
-                    {
-                        var query = from match in db.Fired.Where(x => x.Id.ToString().Contains(txtFind.Text) ||
-                                                                      x.ФИО.Contains(txtFind.Text) ||
-                                                                      x.Департамент.Contains(txtFind.Text) ||
-                                                                      x.Должность.Contains(txtFind.Text) ||
-                                                                      x.Категория.Contains(txtFind.Text))
-                                    select match;
-
-                        firedBindingSource.DataSource = query.ToList();
-                    }
+                    db.Employee.Remove(employeeBindingSource.Current as Employee);
+                    employeeBindingSource.RemoveCurrent();
                 }
             }
         }
-
-        private void tabControl_Selecting(object sender, TabControlCancelEventArgs e)
-        {
-            txtId.DataBindings.Clear();
-            txtFullName.DataBindings.Clear();
-            txtDepartment.DataBindings.Clear();
-            txtPost.DataBindings.Clear();
-            txtCategory.DataBindings.Clear();
-
-            if (tabControl.SelectedTab == tabPageWorkers)
-            {
-                btnAdd.Enabled = true;
-                btnEdit.Enabled = true;
-
-                txtId.DataBindings.Add("Text", employeeBindingSource, "Id");
-                txtFullName.DataBindings.Add("Text", employeeBindingSource, "ФИО");
-                txtDepartment.DataBindings.Add("Text", employeeBindingSource, "Департамент");
-                txtPost.DataBindings.Add("Text", employeeBindingSource, "Должность");
-                txtCategory.DataBindings.Add("Text", employeeBindingSource, "Категория");
-            }
-
-            if (tabControl.SelectedTab == tabPageFired)
-            {
-                btnAdd.Enabled = false;
-                btnEdit.Enabled = true;
-
-                txtId.DataBindings.Add("Text", firedBindingSource, "Id");
-                txtFullName.DataBindings.Add("Text", firedBindingSource, "ФИО");
-                txtDepartment.DataBindings.Add("Text", firedBindingSource, "Департамент");
-                txtPost.DataBindings.Add("Text", firedBindingSource, "Должность");
-                txtCategory.DataBindings.Add("Text", firedBindingSource, "Категория");
-            }
-        }
-
-
-        private void txtId_Validating(object sender, CancelEventArgs e)
-        {
-            string errorMsg;
-
-            if (!ValidId(txtId.Text, out errorMsg))
-            {
-                e.Cancel = true;
-               // txtId.Select(0, txtId.Text.Length);
-
-                txtId.BackColor = Color.Red;
-                MessageBox.Show(errorMsg, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-            }
-        }
-
-        private void txtId_Validated(object sender, EventArgs e)
-        {
-            txtId.BackColor = Color.Green;
-        }
-
-        private bool ValidId(string id, out string errorMassage)
-        {
-            if (id.Length == 0)
-            {
-                errorMassage = "Пустой id, введите значение";
-                return false;
-            }
-
-            if(!Int32.TryParse(id, out int result))
-            {
-                errorMassage = "Нераспознанный символ, введите число";
-                return false;
-            }
-
-            var query = (from match in db.Employee
-                         where match.Id.ToString().Contains(txtId.Text)
-                         select match).ToList().FirstOrDefault();
-
-            if (query != null)
-            {
-                errorMassage = "Id встречается в таблице Работники, введите другое значение";
-                return false;
-            }
-
-            var query2 = (from match in db.Fired
-                          where match.Id.ToString().Contains(txtId.Text)
-                          select match).ToList().FirstOrDefault();
-
-            if (query2 != null)
-            {
-                errorMassage = "Id встречается в таблице Уволенные, введите другое значение";
-                return false;
-            }
-
-            errorMassage = "";
-            return true;
-        }
-
-
     }
 }

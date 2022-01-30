@@ -30,13 +30,6 @@ namespace EmployeeManagementApp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tabPageWorkers = new System.Windows.Forms.TabPage();
-            this.dataGridViewEmployee = new Zuby.ADGV.AdvancedDataGridView();
-            this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.tabPageFired = new System.Windows.Forms.TabPage();
-            this.dataGridViewFired = new Zuby.ADGV.AdvancedDataGridView();
-            this.Restore = new System.Windows.Forms.DataGridViewButtonColumn();
             this.editPanel = new System.Windows.Forms.TableLayoutPanel();
             this.txtId = new System.Windows.Forms.TextBox();
             this.lblId = new System.Windows.Forms.Label();
@@ -56,141 +49,29 @@ namespace EmployeeManagementApp
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txtFind = new System.Windows.Forms.TextBox();
             this.lblFind = new System.Windows.Forms.Label();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.фИОDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.департаментDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.должностьDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPageWorkers = new System.Windows.Forms.TabPage();
+            this.dataGridViewEmployee = new Zuby.ADGV.AdvancedDataGridView();
             this.категорияDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.должностьDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.департаментDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.фИОDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.idDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.фИОDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.департаментDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.должностьDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.категорияDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.firedBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tabControl.SuspendLayout();
-            this.tabPageWorkers.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployee)).BeginInit();
-            this.tabPageFired.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFired)).BeginInit();
+            this.flag_fired = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.editPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.tabControl.SuspendLayout();
+            this.tabPageWorkers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firedBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // tabControl
-            // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tabPageWorkers);
-            this.tabControl.Controls.Add(this.tabPageFired);
-            this.tabControl.Location = new System.Drawing.Point(0, 0);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(945, 774);
-            this.tabControl.TabIndex = 1;
-            this.tabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl_Selecting);
-            // 
-            // tabPageWorkers
-            // 
-            this.tabPageWorkers.Controls.Add(this.dataGridViewEmployee);
-            this.tabPageWorkers.Location = new System.Drawing.Point(4, 25);
-            this.tabPageWorkers.Name = "tabPageWorkers";
-            this.tabPageWorkers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageWorkers.Size = new System.Drawing.Size(937, 745);
-            this.tabPageWorkers.TabIndex = 1;
-            this.tabPageWorkers.Text = "Работники";
-            this.tabPageWorkers.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewEmployee
-            // 
-            this.dataGridViewEmployee.AllowUserToAddRows = false;
-            this.dataGridViewEmployee.AutoGenerateColumns = false;
-            this.dataGridViewEmployee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewEmployee.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridViewEmployee.ColumnHeadersHeight = 25;
-            this.dataGridViewEmployee.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.фИОDataGridViewTextBoxColumn,
-            this.департаментDataGridViewTextBoxColumn,
-            this.должностьDataGridViewTextBoxColumn,
-            this.категорияDataGridViewTextBoxColumn,
-            this.Delete});
-            this.dataGridViewEmployee.DataSource = this.employeeBindingSource;
-            this.dataGridViewEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewEmployee.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewEmployee.FilterAndSortEnabled = true;
-            this.dataGridViewEmployee.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewEmployee.MultiSelect = false;
-            this.dataGridViewEmployee.Name = "dataGridViewEmployee";
-            this.dataGridViewEmployee.ReadOnly = true;
-            this.dataGridViewEmployee.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dataGridViewEmployee.RowHeadersWidth = 51;
-            this.dataGridViewEmployee.RowTemplate.Height = 24;
-            this.dataGridViewEmployee.Size = new System.Drawing.Size(931, 739);
-            this.dataGridViewEmployee.TabIndex = 0;
-            this.dataGridViewEmployee.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmployee_CellContentClick_1);
-            // 
-            // Delete
-            // 
-            this.Delete.FillWeight = 45.17068F;
-            this.Delete.HeaderText = "Удалить";
-            this.Delete.MinimumWidth = 22;
-            this.Delete.Name = "Delete";
-            this.Delete.ReadOnly = true;
-            this.Delete.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Delete.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // tabPageFired
-            // 
-            this.tabPageFired.Controls.Add(this.dataGridViewFired);
-            this.tabPageFired.Location = new System.Drawing.Point(4, 25);
-            this.tabPageFired.Name = "tabPageFired";
-            this.tabPageFired.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFired.Size = new System.Drawing.Size(937, 745);
-            this.tabPageFired.TabIndex = 0;
-            this.tabPageFired.Text = "Уволенные";
-            this.tabPageFired.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViewFired
-            // 
-            this.dataGridViewFired.AllowUserToAddRows = false;
-            this.dataGridViewFired.AutoGenerateColumns = false;
-            this.dataGridViewFired.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewFired.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
-            this.dataGridViewFired.ColumnHeadersHeight = 25;
-            this.dataGridViewFired.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn1,
-            this.фИОDataGridViewTextBoxColumn1,
-            this.департаментDataGridViewTextBoxColumn1,
-            this.должностьDataGridViewTextBoxColumn1,
-            this.категорияDataGridViewTextBoxColumn1,
-            this.Restore});
-            this.dataGridViewFired.DataSource = this.firedBindingSource;
-            this.dataGridViewFired.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewFired.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewFired.FilterAndSortEnabled = true;
-            this.dataGridViewFired.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewFired.Name = "dataGridViewFired";
-            this.dataGridViewFired.ReadOnly = true;
-            this.dataGridViewFired.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dataGridViewFired.RowHeadersWidth = 51;
-            this.dataGridViewFired.RowTemplate.Height = 24;
-            this.dataGridViewFired.Size = new System.Drawing.Size(931, 739);
-            this.dataGridViewFired.TabIndex = 0;
-            this.dataGridViewFired.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFired_CellContentClick);
-            // 
-            // Restore
-            // 
-            this.Restore.FillWeight = 39.14493F;
-            this.Restore.HeaderText = "Восстановить";
-            this.Restore.MinimumWidth = 22;
-            this.Restore.Name = "Restore";
-            this.Restore.ReadOnly = true;
-            this.Restore.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // editPanel
             // 
@@ -208,7 +89,7 @@ namespace EmployeeManagementApp
             this.editPanel.Controls.Add(this.lblDepartment, 0, 4);
             this.editPanel.Controls.Add(this.txtFullName, 0, 3);
             this.editPanel.Controls.Add(this.lblName, 0, 2);
-            this.editPanel.Location = new System.Drawing.Point(967, 25);
+            this.editPanel.Location = new System.Drawing.Point(1347, 28);
             this.editPanel.MaximumSize = new System.Drawing.Size(654, 319);
             this.editPanel.MinimumSize = new System.Drawing.Size(654, 319);
             this.editPanel.Name = "editPanel";
@@ -233,8 +114,6 @@ namespace EmployeeManagementApp
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(648, 22);
             this.txtId.TabIndex = 0;
-            this.txtId.Validating += new System.ComponentModel.CancelEventHandler(this.txtId_Validating);
-            this.txtId.Validated += new System.EventHandler(this.txtId_Validated);
             // 
             // lblId
             // 
@@ -332,7 +211,7 @@ namespace EmployeeManagementApp
             this.tableLayoutPanel1.Controls.Add(this.btnEdit, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnSave, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnCancel, 3, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(967, 407);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(1347, 410);
             this.tableLayoutPanel1.MaximumSize = new System.Drawing.Size(654, 74);
             this.tableLayoutPanel1.MinimumSize = new System.Drawing.Size(654, 74);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -391,7 +270,7 @@ namespace EmployeeManagementApp
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tableLayoutPanel2.Controls.Add(this.txtFind, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.lblFind, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(967, 350);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(1347, 353);
             this.tableLayoutPanel2.MaximumSize = new System.Drawing.Size(654, 56);
             this.tableLayoutPanel2.MinimumSize = new System.Drawing.Size(654, 56);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -419,46 +298,58 @@ namespace EmployeeManagementApp
             this.lblFind.Text = "Поиск:";
             this.lblFind.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // idDataGridViewTextBoxColumn
+            // tabControl
             // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn.FillWeight = 10F;
-            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
-            this.idDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl.Controls.Add(this.tabPageWorkers);
+            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(1315, 764);
+            this.tabControl.TabIndex = 1;
             // 
-            // фИОDataGridViewTextBoxColumn
+            // tabPageWorkers
             // 
-            this.фИОDataGridViewTextBoxColumn.DataPropertyName = "ФИО";
-            this.фИОDataGridViewTextBoxColumn.FillWeight = 45.17068F;
-            this.фИОDataGridViewTextBoxColumn.HeaderText = "ФИО";
-            this.фИОDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.фИОDataGridViewTextBoxColumn.Name = "фИОDataGridViewTextBoxColumn";
-            this.фИОDataGridViewTextBoxColumn.ReadOnly = true;
-            this.фИОDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.tabPageWorkers.Controls.Add(this.dataGridViewEmployee);
+            this.tabPageWorkers.Location = new System.Drawing.Point(4, 25);
+            this.tabPageWorkers.Name = "tabPageWorkers";
+            this.tabPageWorkers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageWorkers.Size = new System.Drawing.Size(1307, 735);
+            this.tabPageWorkers.TabIndex = 1;
+            this.tabPageWorkers.Text = "Работники";
+            this.tabPageWorkers.UseVisualStyleBackColor = true;
             // 
-            // департаментDataGridViewTextBoxColumn
+            // dataGridViewEmployee
             // 
-            this.департаментDataGridViewTextBoxColumn.DataPropertyName = "Департамент";
-            this.департаментDataGridViewTextBoxColumn.FillWeight = 45.17068F;
-            this.департаментDataGridViewTextBoxColumn.HeaderText = "Департамент";
-            this.департаментDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.департаментDataGridViewTextBoxColumn.Name = "департаментDataGridViewTextBoxColumn";
-            this.департаментDataGridViewTextBoxColumn.ReadOnly = true;
-            this.департаментDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // должностьDataGridViewTextBoxColumn
-            // 
-            this.должностьDataGridViewTextBoxColumn.DataPropertyName = "Должность";
-            this.должностьDataGridViewTextBoxColumn.FillWeight = 45.17068F;
-            this.должностьDataGridViewTextBoxColumn.HeaderText = "Должность";
-            this.должностьDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.должностьDataGridViewTextBoxColumn.Name = "должностьDataGridViewTextBoxColumn";
-            this.должностьDataGridViewTextBoxColumn.ReadOnly = true;
-            this.должностьDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.dataGridViewEmployee.AllowUserToAddRows = false;
+            this.dataGridViewEmployee.AutoGenerateColumns = false;
+            this.dataGridViewEmployee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewEmployee.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
+            this.dataGridViewEmployee.ColumnHeadersHeight = 25;
+            this.dataGridViewEmployee.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idDataGridViewTextBoxColumn1,
+            this.фИОDataGridViewTextBoxColumn1,
+            this.департаментDataGridViewTextBoxColumn1,
+            this.должностьDataGridViewTextBoxColumn1,
+            this.категорияDataGridViewTextBoxColumn1,
+            this.flag_fired});
+            this.dataGridViewEmployee.DataSource = this.employeeBindingSource;
+            this.dataGridViewEmployee.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewEmployee.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewEmployee.FilterAndSortEnabled = true;
+            this.dataGridViewEmployee.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViewEmployee.MultiSelect = false;
+            this.dataGridViewEmployee.Name = "dataGridViewEmployee";
+            this.dataGridViewEmployee.ReadOnly = true;
+            this.dataGridViewEmployee.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dataGridViewEmployee.RowHeadersWidth = 51;
+            this.dataGridViewEmployee.RowTemplate.Height = 24;
+            this.dataGridViewEmployee.Size = new System.Drawing.Size(1301, 729);
+            this.dataGridViewEmployee.TabIndex = 0;
+            this.dataGridViewEmployee.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewEmployee_CellContentClick_1);
+            this.dataGridViewEmployee.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dataGridViewEmployee_KeyDown);
             // 
             // категорияDataGridViewTextBoxColumn
             // 
@@ -469,25 +360,71 @@ namespace EmployeeManagementApp
             this.категорияDataGridViewTextBoxColumn.Name = "категорияDataGridViewTextBoxColumn";
             this.категорияDataGridViewTextBoxColumn.ReadOnly = true;
             this.категорияDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.категорияDataGridViewTextBoxColumn.Width = 125;
             // 
-            // employeeBindingSource
+            // должностьDataGridViewTextBoxColumn
             // 
-            this.employeeBindingSource.DataSource = typeof(EmployeeManagementApp.Employee);
+            this.должностьDataGridViewTextBoxColumn.DataPropertyName = "Должность";
+            this.должностьDataGridViewTextBoxColumn.FillWeight = 45.17068F;
+            this.должностьDataGridViewTextBoxColumn.HeaderText = "Должность";
+            this.должностьDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.должностьDataGridViewTextBoxColumn.Name = "должностьDataGridViewTextBoxColumn";
+            this.должностьDataGridViewTextBoxColumn.ReadOnly = true;
+            this.должностьDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.должностьDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // департаментDataGridViewTextBoxColumn
+            // 
+            this.департаментDataGridViewTextBoxColumn.DataPropertyName = "Департамент";
+            this.департаментDataGridViewTextBoxColumn.FillWeight = 45.17068F;
+            this.департаментDataGridViewTextBoxColumn.HeaderText = "Департамент";
+            this.департаментDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.департаментDataGridViewTextBoxColumn.Name = "департаментDataGridViewTextBoxColumn";
+            this.департаментDataGridViewTextBoxColumn.ReadOnly = true;
+            this.департаментDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.департаментDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // фИОDataGridViewTextBoxColumn
+            // 
+            this.фИОDataGridViewTextBoxColumn.DataPropertyName = "ФИО";
+            this.фИОDataGridViewTextBoxColumn.FillWeight = 45.17068F;
+            this.фИОDataGridViewTextBoxColumn.HeaderText = "ФИО";
+            this.фИОDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.фИОDataGridViewTextBoxColumn.Name = "фИОDataGridViewTextBoxColumn";
+            this.фИОDataGridViewTextBoxColumn.ReadOnly = true;
+            this.фИОDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.фИОDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.FillWeight = 10F;
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.idDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.idDataGridViewTextBoxColumn.Width = 125;
             // 
             // idDataGridViewTextBoxColumn1
             // 
+            this.idDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            this.idDataGridViewTextBoxColumn1.FillWeight = 10F;
+            this.idDataGridViewTextBoxColumn1.FillWeight = 1F;
+            this.idDataGridViewTextBoxColumn1.Frozen = true;
             this.idDataGridViewTextBoxColumn1.HeaderText = "Id";
             this.idDataGridViewTextBoxColumn1.MinimumWidth = 22;
             this.idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
             this.idDataGridViewTextBoxColumn1.ReadOnly = true;
             this.idDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.idDataGridViewTextBoxColumn1.Width = 40;
             // 
             // фИОDataGridViewTextBoxColumn1
             // 
+            this.фИОDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.фИОDataGridViewTextBoxColumn1.DataPropertyName = "ФИО";
-            this.фИОDataGridViewTextBoxColumn1.FillWeight = 39.14493F;
+            this.фИОDataGridViewTextBoxColumn1.FillWeight = 1F;
             this.фИОDataGridViewTextBoxColumn1.HeaderText = "ФИО";
             this.фИОDataGridViewTextBoxColumn1.MinimumWidth = 22;
             this.фИОDataGridViewTextBoxColumn1.Name = "фИОDataGridViewTextBoxColumn1";
@@ -497,7 +434,7 @@ namespace EmployeeManagementApp
             // департаментDataGridViewTextBoxColumn1
             // 
             this.департаментDataGridViewTextBoxColumn1.DataPropertyName = "Департамент";
-            this.департаментDataGridViewTextBoxColumn1.FillWeight = 39.14493F;
+            this.департаментDataGridViewTextBoxColumn1.FillWeight = 1F;
             this.департаментDataGridViewTextBoxColumn1.HeaderText = "Департамент";
             this.департаментDataGridViewTextBoxColumn1.MinimumWidth = 22;
             this.департаментDataGridViewTextBoxColumn1.Name = "департаментDataGridViewTextBoxColumn1";
@@ -507,7 +444,7 @@ namespace EmployeeManagementApp
             // должностьDataGridViewTextBoxColumn1
             // 
             this.должностьDataGridViewTextBoxColumn1.DataPropertyName = "Должность";
-            this.должностьDataGridViewTextBoxColumn1.FillWeight = 39.14493F;
+            this.должностьDataGridViewTextBoxColumn1.FillWeight = 1F;
             this.должностьDataGridViewTextBoxColumn1.HeaderText = "Должность";
             this.должностьDataGridViewTextBoxColumn1.MinimumWidth = 22;
             this.должностьDataGridViewTextBoxColumn1.Name = "должностьDataGridViewTextBoxColumn1";
@@ -517,22 +454,33 @@ namespace EmployeeManagementApp
             // категорияDataGridViewTextBoxColumn1
             // 
             this.категорияDataGridViewTextBoxColumn1.DataPropertyName = "Категория";
-            this.категорияDataGridViewTextBoxColumn1.FillWeight = 39.14493F;
+            this.категорияDataGridViewTextBoxColumn1.FillWeight = 1F;
             this.категорияDataGridViewTextBoxColumn1.HeaderText = "Категория";
             this.категорияDataGridViewTextBoxColumn1.MinimumWidth = 22;
             this.категорияDataGridViewTextBoxColumn1.Name = "категорияDataGridViewTextBoxColumn1";
             this.категорияDataGridViewTextBoxColumn1.ReadOnly = true;
             this.категорияDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // firedBindingSource
+            // flag_fired
             // 
-            this.firedBindingSource.DataSource = typeof(EmployeeManagementApp.Fired);
+            this.flag_fired.DataPropertyName = "Уволен";
+            this.flag_fired.FillWeight = 1F;
+            this.flag_fired.HeaderText = "Уволен";
+            this.flag_fired.MinimumWidth = 22;
+            this.flag_fired.Name = "flag_fired";
+            this.flag_fired.ReadOnly = true;
+            this.flag_fired.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.flag_fired.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // employeeBindingSource
+            // 
+            this.employeeBindingSource.DataSource = typeof(EmployeeManagementApp.Employee);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1641, 776);
+            this.ClientSize = new System.Drawing.Size(2045, 776);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.editPanel);
@@ -541,26 +489,20 @@ namespace EmployeeManagementApp
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabControl.ResumeLayout(false);
-            this.tabPageWorkers.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployee)).EndInit();
-            this.tabPageFired.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFired)).EndInit();
             this.editPanel.ResumeLayout(false);
             this.editPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            this.tabControl.ResumeLayout(false);
+            this.tabPageWorkers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewEmployee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.firedBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tabPageWorkers;
-        private System.Windows.Forms.TabPage tabPageFired;
         private System.Windows.Forms.TableLayoutPanel editPanel;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.TextBox txtFullName;
@@ -570,10 +512,7 @@ namespace EmployeeManagementApp
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblDepartment;
         private System.Windows.Forms.Label lblPost;
-        private System.Windows.Forms.BindingSource firedBindingSource;
         private System.Windows.Forms.BindingSource employeeBindingSource;
-        private Zuby.ADGV.AdvancedDataGridView dataGridViewEmployee;
-        private Zuby.ADGV.AdvancedDataGridView dataGridViewFired;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.Label lblId;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -584,18 +523,20 @@ namespace EmployeeManagementApp
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TextBox txtFind;
         private System.Windows.Forms.Label lblFind;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPageWorkers;
+        private Zuby.ADGV.AdvancedDataGridView dataGridViewEmployee;
+        private System.Windows.Forms.DataGridViewTextBoxColumn категорияDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn должностьDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn департаментDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn фИОDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn фИОDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn департаментDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn должностьDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn категорияDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewButtonColumn Restore;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn фИОDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn департаментDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn должностьDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn категорияDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewButtonColumn Delete;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn flag_fired;
     }
 }
 

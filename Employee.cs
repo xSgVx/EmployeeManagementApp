@@ -12,12 +12,13 @@ namespace EmployeeManagementApp
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee 
+    public partial class Employee
     {
         public int Id { get; set; }
         public string ФИО { get; set; }
         public string Департамент { get; set; }
         public string Должность { get; set; }
         public string Категория { get; set; }
+        public Nullable<bool> Уволен { get; set; }
     }
 }

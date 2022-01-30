@@ -14,6 +14,7 @@
           <Property Name="Департамент" Type="nvarchar(max)" />
           <Property Name="Должность" Type="nvarchar(max)" />
           <Property Name="Категория" Type="nvarchar(max)" />
+          <Property Name="Уволен" Type="bit" />
         </EntityType>
         <EntityType Name="Fired">
           <Key>
@@ -24,6 +25,7 @@
           <Property Name="Департамент" Type="nvarchar(max)" />
           <Property Name="Должность" Type="nvarchar(max)" />
           <Property Name="Категория" Type="nvarchar(max)" />
+          <Property Name="Уволен" Type="bit" />
         </EntityType>
         <EntityContainer Name="Хранилище EmployeeModelContainer">
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
@@ -43,6 +45,7 @@
           <Property Name="Департамент" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Должность" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Категория" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Уволен" Type="Boolean" />
         </EntityType>
         <EntityType Name="Fired">
           <Key>
@@ -53,6 +56,7 @@
           <Property Name="Департамент" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Должность" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Категория" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Уволен" Type="Boolean" />
         </EntityType>
         <EntityContainer Name="EmployeeEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Employee" EntityType="Self.Employee" />
@@ -72,6 +76,7 @@
                 <ScalarProperty Name="Департамент" ColumnName="Департамент" />
                 <ScalarProperty Name="Должность" ColumnName="Должность" />
                 <ScalarProperty Name="Категория" ColumnName="Категория" />
+                <ScalarProperty Name="Уволен" ColumnName="Уволен" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -83,6 +88,7 @@
                 <ScalarProperty Name="Департамент" ColumnName="Департамент" />
                 <ScalarProperty Name="Должность" ColumnName="Должность" />
                 <ScalarProperty Name="Категория" ColumnName="Категория" />
+                <ScalarProperty Name="Уволен" ColumnName="Уволен" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
