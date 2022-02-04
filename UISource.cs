@@ -46,7 +46,7 @@ namespace EmployeeManagementApp
                                                  x.ФИО.Contains(searchKey) ||
                                                  x.Департамент.Contains(searchKey) ||
                                                  x.Должность.Contains(searchKey) ||
-                                                 x.Категория.Contains(searchKey)).Where(x => x.Уволен.Equals(false))
+                                                 x.Категория.Contains(searchKey))//.Where(x => x.Уволен.Equals(false))
                         select match;
 
             bindingSource.DataSource = query.ToList();

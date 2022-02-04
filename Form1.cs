@@ -51,6 +51,29 @@ namespace EmployeeManagementApp
             }
         }
 
+        private void CancelChanges()
+        {
+            foreach (DbEntityEntry entry in db.ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case System.Data.Entity.EntityState.Added:
+                        entry.State = System.Data.Entity.EntityState.Detached;
+                        employeeBindingSource.RemoveCurrent();
+                        break;
+                    case System.Data.Entity.EntityState.Modified:
+                        entry.State = System.Data.Entity.EntityState.Unchanged;
+                        employeeBindingSource.CancelEdit();
+                        break;
+                    case System.Data.Entity.EntityState.Deleted:
+                        entry.Reload();
+                        break;
+                }
+            }
+
+            employeeBindingSource.ResetBindings(true);
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
             btnAdd.Enabled = true;
@@ -98,25 +121,7 @@ namespace EmployeeManagementApp
             btnAdd.Enabled = true;
             btnEdit.Enabled = true;
 
-            foreach (DbEntityEntry entry in db.ChangeTracker.Entries())
-            {
-                switch (entry.State)
-                {
-                    case System.Data.Entity.EntityState.Added:
-                        entry.State = System.Data.Entity.EntityState.Detached;
-                        employeeBindingSource.RemoveCurrent();
-                        break;
-                    case System.Data.Entity.EntityState.Modified:
-                        entry.State = System.Data.Entity.EntityState.Unchanged;
-                        employeeBindingSource.CancelEdit();
-                        break;
-                    case System.Data.Entity.EntityState.Deleted:
-                        entry.Reload();
-                        break;
-                }
-            }
-
-            employeeBindingSource.ResetBindings(true);
+            CancelChanges();
         }
 
         private void dataGridViewEmployee_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
@@ -125,6 +130,7 @@ namespace EmployeeManagementApp
             {
                 var employee = employeeBindingSource.Current as Employee;
                 employee.Уволен = !employee.Уволен;
+                //db.SaveChanges();
             }
         }
 
@@ -157,6 +163,14 @@ namespace EmployeeManagementApp
                     employeeBindingSource.RemoveCurrent();
                 }
             }
+        }
+
+        private void btn_refreshTable_Click(object sender, EventArgs e)
+        {
+            CancelChanges();
+            employeeUISource.RebuildDataSource();
+            //employeeUISource.RebuildListFilter(txtFind.Text);
+            //employeeBindingSource.ResetBindings(false);
         }
     }
 }
