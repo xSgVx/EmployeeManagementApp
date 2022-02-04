@@ -131,7 +131,6 @@ namespace EmployeeManagementApp
             {
                 var employee = employeeBindingSource.Current as Employee;
                 employee.Уволен = !employee.Уволен;
-                //db.SaveChanges();
             }
         }
 
@@ -170,8 +169,6 @@ namespace EmployeeManagementApp
         {
             CancelChanges();
             employeeUISource.RebuildDataSource();
-            //employeeUISource.RebuildListFilter(txtFind.Text);
-            //employeeBindingSource.ResetBindings(false);
         }
     }
 }
