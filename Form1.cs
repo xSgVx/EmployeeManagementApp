@@ -82,7 +82,8 @@ namespace EmployeeManagementApp
 
             Employee person = new Employee()
             {
-                Id = employeeBindingSource.Count + 1
+                Id = employeeBindingSource.Count + 1,
+                Уволен = false
             };
 
             db.Employee.Add(person);
